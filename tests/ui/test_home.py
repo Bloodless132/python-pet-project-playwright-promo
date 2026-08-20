@@ -1,7 +1,8 @@
 from playwright.sync_api import Page,expect
-
+from src.framework.ui.pages.home_page import HomePage
 
 def test_home_page(page: Page):
-    page.goto("http://www.uitestingplayground.com/home")
+    home_page = HomePage(page)
 
-    assert page.title() == "UI Test Automation Playground"
+    home_page.open()
+    home_page.expect_title("UI Test Automation Playground")
