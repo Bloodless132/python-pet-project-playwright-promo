@@ -1,5 +1,5 @@
 import pytest
-from playwright.sync_api import Page, Playwright
+from playwright.sync_api import Page, Playwright, expect
 
 
 @pytest.fixture
@@ -10,3 +10,8 @@ def page(playwright: Playwright) -> Page:
     yield page
 
     browser.close()
+
+
+def pytest_configure():
+    # Global timeout for expect(...) assertions (e.g., 5 seconds)
+    expect.set_options(timeout=20000)

@@ -1,15 +1,12 @@
-from playwright.sync_api import Page
+from playwright.sync_api import Page,expect
+from src.framework.ui.pages.ajax_page import AjaxPage
 
 
 def test_ajax_data(page: Page):
-    page.goto("http://www.uitestingplayground.com/ajax")
-
-    page.get_by_role("button", name="Button Triggering AJAX Request").click()
-
-    spinner = page.locator("#spinner")
-    assert spinner.is_visible() , "Spinner is not visible after button click"
-
-    ajax_request_data = page.get_by_text("Data loaded with AJAX Get request.")
-    ajax_request_data.wait_for()  # Wait for AJAX data to be uploaded on the page
-
-    assert ajax_request_data.is_visible() # There is depricated auto-wait functionality
+    ajax_page = AjaxPage(page)
+    ajax_page.open()
+    ajax_page.expect_spinner_hidden()
+    ajax_page.click_ajax_request_button()
+    ajax_page.expect_spinner_visible()
+    ajax_page.expect_ajax_data_banner_hidden()
+    ajax_page.expect_ajax_data_banner_visible()

@@ -1,14 +1,13 @@
 from playwright.sync_api import Page
 
+from src.framework.ui.pages.client_delay_page import ClientDelayPage
+
 
 def test_client_side_delay(page: Page):
-    page.goto("http://www.uitestingplayground.com/clientdelay")
-
-    page.get_by_role("button", name="Button Triggering Client Side Logic").click()
-
-    spinner = page.locator("#spinner")
-    assert spinner.is_visible() , "Spinner is not visible after button click"
-
-    client_data_calculation = page.get_by_text("Data calculated on the client side.")
-    client_data_calculation.wait_for()  # Wait for calculation to be done on the page
-    assert client_data_calculation.is_visible() # There is depricated auto-wait functionality
+    client_delay_page = ClientDelayPage(page)
+    client_delay_page.open()
+    client_delay_page.expect_spinner_hidden()
+    client_delay_page.click_client_side_logic_button()
+    client_delay_page.expect_spinner_visible()
+    client_delay_page.expect_client_side_data_banner_hidden()
+    client_delay_page.expect_client_side_data_banner_visible()
