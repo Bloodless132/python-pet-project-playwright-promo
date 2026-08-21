@@ -30,9 +30,7 @@ jobs:
           pip install -e .
 
       - name: Install Playwright Chromium
-        run: |
-          playwright install --with-deps chromium
+        run: playwright install --with-deps chromium
 
       - name: Run UI tests
-        run: |
-          pytest tests/ui
+        run: pytest tests/ui
