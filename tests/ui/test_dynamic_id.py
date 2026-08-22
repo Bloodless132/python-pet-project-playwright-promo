@@ -1,4 +1,4 @@
-from playwright.sync_api import Page,expect
+from playwright.sync_api import Page
 from src.framework.ui.pages.dynamic_id_page import DynamicIdPage
 
 

@@ -13,5 +13,5 @@ def page(playwright: Playwright) -> Page:
 
 
 def pytest_configure():
-    # Global timeout for expect(...) assertions (e.g., 5 seconds)
+    # Global timeout for expect assertions
     expect.set_options(timeout=20000)
