@@ -1,5 +1,4 @@
 from playwright.sync_api import Page
-
 from src.framework.ui.pages.client_delay_page import ClientDelayPage
 
 
