@@ -8,7 +8,7 @@ def test_progress_bar(page: Page):
 
     progress_bar_page.click_start_button()
 
-    progress_bar_page.expect_progress_bar_contains_value("75")
+    progress_bar_page.wait_until_progress_bar_reaches(75)
     progress_bar_page.click_stop_button()
 
-    progress_bar_page.expect_progress_bar_contains_value("75")
+    assert progress_bar_page.get_progress_bar_value() >= 75

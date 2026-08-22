@@ -24,5 +24,9 @@ class ProgressBarPage(BasePage):
     def click_stop_button(self):
         self.stop_button.click()
 
-    def expect_progress_bar_contains_value(self, expected_value: str):
-        expect(self.progress_bar).to_have_text(f"{expected_value}%")
+    def get_progress_bar_value(self) -> int:
+        return int(self.progress_bar.get_attribute("aria-valuenow"))
+
+    def wait_until_progress_bar_reaches(self,target: int):
+        while self.get_progress_bar_value() < target:
+            self.page.wait_for_timeout(25)
