@@ -33,9 +33,7 @@ htmlcov/
 coverage.xml
 
 # Allure
-
 allure-results/
-
 allure-report/
 
 # Environment variables
