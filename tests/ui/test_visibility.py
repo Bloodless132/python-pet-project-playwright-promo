@@ -24,7 +24,7 @@ def test_visibility(page: Page):
     visibility_page.expect_opacity_zero_button_have_css_zero_opacity()
     visibility_page.click_opacity_zero_button()
     visibility_page.expect_visibility_hidden_button_hidden()
-    visibility_page.expect_display_none_button_hidden()
+    visibility_page.expect_display_none_button_visible()
     visibility_page.expect_offscreen_button_not_in_viewport()
 
 
