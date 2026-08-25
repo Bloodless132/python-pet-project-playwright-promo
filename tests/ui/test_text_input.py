@@ -1,4 +1,4 @@
-from src.framework.lib.helper import random_string
+from src.framework.ui.lib.helper import random_string
 from playwright.sync_api import Page
 from src.framework.ui.pages.text_input_page import TextInputPage
 
