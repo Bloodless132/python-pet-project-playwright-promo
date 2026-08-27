@@ -8,6 +8,7 @@ dependencies = [
     "playwright",
     "pytest-playwright",
     "allure-pytest",
+    "requests",
 ]
 
 [tool.pytest.ini_options]

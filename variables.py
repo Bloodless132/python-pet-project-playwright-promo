@@ -1,3 +1,4 @@
+DUMMY_JSON_BASE_URL="https://dummyjson.com/"
 URL_HOME = "http://www.uitestingplayground.com/home"
 URL_DYNAMIC_ID = "http://www.uitestingplayground.com/dynamicid"
 URL_AJAX = "http://www.uitestingplayground.com/ajax"

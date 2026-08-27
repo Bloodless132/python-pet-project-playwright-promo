@@ -1,5 +1,5 @@
 from playwright.sync_api import Page,expect
-from src.framework.ui.pages.variables import URL_TEXT_INPUT
+from variables import URL_TEXT_INPUT
 from src.framework.ui.pages.base_page import BasePage
 
 class TextInputPage(BasePage):
