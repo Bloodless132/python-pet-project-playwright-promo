@@ -9,11 +9,11 @@ class RequestsAuthClient:
     def __init__(self, api_client: RequestsApiClient):
         self._api_client = api_client
 
-    @allure.step("Login user: {username}")
-    def login(self, username: str, password: str) -> Response:
+    @allure.step("Login user: {credentials}")
+    def login(self, credentials: dict) -> Response:
         return self._api_client.post(
             "auth/login",
-            json={"username": username, "password": password}
+            json=credentials
         )
 
     @allure.step("Get authenticated user")
