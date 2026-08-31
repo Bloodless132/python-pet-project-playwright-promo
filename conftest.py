@@ -9,7 +9,7 @@ from src.framework.api.clients.requests_auth_client import RequestsAuthClient
 from src.framework.api.playwright_api_client import PlaywrightApiClient
 from src.framework.api.requests_api_client import RequestsApiClient
 from src.framework.api.clients.requests_product_client import RequestsProductClient
-from playwright.sync_api import Playwright, expect, APIRequestContext
+from playwright.sync_api import Playwright, expect
 from src.framework.api.clients.product_client import ProductClient
 from variables import DUMMY_JSON_BASE_URL
 
