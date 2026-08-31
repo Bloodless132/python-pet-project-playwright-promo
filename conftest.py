@@ -1,6 +1,17 @@
+import logging
+import allure
 import pytest
-from playwright.sync_api import Page, Playwright, expect, APIRequestContext
+
+from playwright.sync_api import Page
+
+from src.framework.api.clients.playwright_auth_client import PlaywrightAuthClient
+from src.framework.api.clients.requests_auth_client import RequestsAuthClient
+from src.framework.api.playwright_api_client import PlaywrightApiClient
+from src.framework.api.requests_api_client import RequestsApiClient
+from src.framework.api.clients.requests_product_client import RequestsProductClient
+from playwright.sync_api import Playwright, expect, APIRequestContext
 from src.framework.api.clients.product_client import ProductClient
+from variables import DUMMY_JSON_BASE_URL
 
 
 
@@ -9,23 +20,33 @@ from src.framework.api.clients.product_client import ProductClient
 def pytest_configure():
     # Global timeout for expect assertions
     expect.set_options(timeout=20000)
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s | %(levelname)s | %(message)s"
+    )
 
 
 @pytest.fixture
-def api_request_context(playwright: Playwright) -> APIRequestContext:
-    request_context = playwright.request.new_context(
-        base_url="https://dummyjson.com/"
-    )
-    yield request_context
+def playwright_api_client(playwright: Playwright) -> PlaywrightApiClient:
+    request_context = playwright.request.new_context()
+    client = PlaywrightApiClient(request_context, DUMMY_JSON_BASE_URL)
+    yield client
     request_context.dispose()
 
 @pytest.fixture
-def product_client(api_request_context: APIRequestContext) -> ProductClient:
-    return ProductClient(api_request_context)
+def requests_api_client():
+    client = RequestsApiClient(DUMMY_JSON_BASE_URL)
+    yield client
+    client.close()
 
-import allure
-import pytest
-from playwright.sync_api import Page
+
+@pytest.fixture
+def product_client(playwright_api_client: PlaywrightApiClient) -> ProductClient:
+    return ProductClient(playwright_api_client)
+
+@pytest.fixture
+def requests_product_client(requests_api_client: RequestsApiClient) -> RequestsProductClient:
+    return RequestsProductClient(requests_api_client)
 
 
 @pytest.hookimpl(hookwrapper=True)
@@ -44,3 +65,11 @@ def pytest_runtest_makereport(item, call):
                 name="Failure screenshot",
                 attachment_type=allure.attachment_type.PNG,
             )
+
+@pytest.fixture
+def playwright_auth_client(playwright_api_client: PlaywrightApiClient) -> PlaywrightAuthClient:
+    return PlaywrightAuthClient(playwright_api_client)
+
+@pytest.fixture
+def requests_auth_client(requests_api_client: RequestsApiClient) -> RequestsAuthClient:
+    return RequestsAuthClient(requests_api_client)

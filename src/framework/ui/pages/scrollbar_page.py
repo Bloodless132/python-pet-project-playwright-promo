@@ -1,5 +1,5 @@
 from playwright.sync_api import Page,expect
-from src.framework.ui.pages.variables import URL_SCROLL_BAR
+from variables import URL_SCROLL_BAR
 from src.framework.ui.pages.base_page import BasePage
 
 class ScrollBarPage(BasePage):

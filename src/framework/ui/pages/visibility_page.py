@@ -1,6 +1,6 @@
 import pytest
 from playwright.sync_api import Page,expect
-from src.framework.ui.pages.variables import URL_VISIBILITY
+from variables import URL_VISIBILITY
 from src.framework.ui.pages.base_page import BasePage
 from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
 

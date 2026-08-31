@@ -1,6 +1,6 @@
 import allure
 
-from src.framework.api.lib.helper import random_string
+from src.framework.api.lib.helper_playwright import random_string
 from src.framework.api.models.product import ProductPayload
 import random
 
