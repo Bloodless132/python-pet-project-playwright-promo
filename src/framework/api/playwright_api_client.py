@@ -44,7 +44,7 @@ class PlaywrightApiClient:
             body = response.json()
             logger.info("Response body: %s", body)
             allure.attach(json.dumps(body, indent=2), "Response body", allure.attachment_type.JSON)
-        except Exception:
+        except ValueError:
             body = response.text()
             logger.info("Response body: %s", body)
             allure.attach(body, "Response body", allure.attachment_type.TEXT)

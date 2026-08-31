@@ -2,14 +2,10 @@ name: API Tests
 
 on:
   workflow_dispatch:
-
   pull_request:
-    branches:
-      - main
-
+    branches: [main]
   push:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
   api-tests:
@@ -25,9 +21,7 @@ jobs:
           python-version: "3.13"
 
       - name: Install project dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -e .
+        run: python -m pip install --upgrade pip && pip install -e .
 
       - name: Install Playwright Chromium
         run: playwright install --with-deps chromium
